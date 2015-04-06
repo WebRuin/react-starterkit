@@ -12,7 +12,7 @@ var app = 'app/';
 var dist = 'dist/';
 
 // https://github.com/ai/autoprefixer
-var autoprefixerBrowsers = [                 
+var autoprefixerBrowsers = [
   'ie >= 9',
   'ie_mob >= 10',
   'ff >= 30',
@@ -43,15 +43,15 @@ gulp.task('html', function() {
 
 gulp.task('styles',function(cb) {
 
-  // convert stylus to css
-  return gulp.src(app + 'stylus/main.styl')
-    .pipe($.stylus({
+  // convert less to css
+  return gulp.src(app + 'style/main.scss')
+    .pipe($.sass({
       // only compress if we are in production
       compress: isProduction,
       // include 'normal' css into main.css
       'include css' : true
     }))
-    .pipe($.autoprefixer({browsers: autoprefixerBrowsers})) 
+    .pipe($.autoprefixer({browsers: autoprefixerBrowsers}))
     .pipe(gulp.dest(dist + 'css/'))
     .pipe($.size({ title : 'css' }))
     .pipe($.connect.reload());
@@ -78,7 +78,7 @@ gulp.task('images', function(cb) {
 
 // watch styl, html and js file changes
 gulp.task('watch', function() {
-  gulp.watch(app + 'stylus/*.styl', ['styles']);
+  gulp.watch(app + 'style/*.scss', ['styles']);
   gulp.watch(app + 'index.html', ['html']);
   gulp.watch(app + 'scripts/**/*.js', ['scripts']);
   gulp.watch(app + 'scripts/**/*.jsx', ['scripts']);
