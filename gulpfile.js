@@ -43,7 +43,7 @@ gulp.task('html', function() {
 
 gulp.task('styles',function(cb) {
 
-  // convert less to css
+  // convert scss to css
   return gulp.src(app + 'style/main.scss')
     .pipe($.sass({
       // only compress if we are in production
